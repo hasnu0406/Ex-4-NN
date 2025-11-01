@@ -1,8 +1,8 @@
 
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>NAME: DAKSHA SUBBAIAN</H3>
+<H3>REGISTER NO.: 212223230036</H3>
 <H3>EX. NO.4</H3>
-<H3>DATE:</H3>
+<H3>DATE: </H3>
 <H1 ALIGN =CENTER>Implementation of MLP with Backpropagation for Multiclassification</H1>
 <H3>Aim:</H3>
 To implement a Multilayer Perceptron for Multi classification
@@ -116,11 +116,42 @@ Normalize our dataset.
 
 <H3>Program:</H3> 
 
-Insert your code here
+```python
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+arr = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species']
+df = pd.read_csv(url, names=arr)
+
+
+a = df.iloc[:, 0:4]
+b = df.iloc[:, 4]
+
+
+training_a, testing_a, training_b, testing_b = train_test_split(a, b, test_size=0.25)
+
+
+myscaler = StandardScaler()
+training_a = myscaler.fit_transform(training_a)
+testing_a = myscaler.transform(testing_a)
+
+
+m1 = MLPClassifier(hidden_layer_sizes=(12, 13, 14), activation='relu', solver='adam', max_iter=2500)
+m1.fit(training_a, training_b)
+
+
+predicted_values = m1.predict(testing_a)
+print(confusion_matrix(testing_b, predicted_values))
+print(classification_report(testing_b, predicted_values))
+```
 
 <H3>Output:</H3>
 
-Show your results here
+<img width="554" height="286" alt="image" src="https://github.com/user-attachments/assets/6e8cfacd-8f45-4285-bb9a-9ae11c805a53" />
 
 <H3>Result:</H3>
 Thus, MLP is implemented for multi-classification using python.
